@@ -1,8 +1,6 @@
 -- Dentivora schema: services, pricing, hours, dentists, FAQs, appointments, admin roles.
 -- Run in the Supabase SQL editor, or via `supabase db push`.
 
-create extension if not exists "pgcrypto";
-
 -- ---------------------------------------------------------------- roles
 create table if not exists public.admin_users (
   user_id uuid primary key references auth.users(id) on delete cascade,
@@ -187,7 +185,7 @@ begin
 
   select duration_minutes into dur from services where services.id = p_service;
   e := p_start + make_interval(mins => dur);
-  ref := 'DV-' || upper(substr(encode(gen_random_bytes(5), 'hex'), 1, 8));
+  ref := 'DV-' || upper(substr(replace(gen_random_uuid()::text, '-', ''), 1, 8));
 
   insert into appointments (reference, service_id, appointment_date, start_time, end_time,
                             full_name, email, phone, notes, source)
@@ -200,8 +198,9 @@ exception when unique_violation then
 end $$;
 
 revoke all on function public.create_appointment from public, anon, authenticated;
-revoke all on function public.available_slots from public;
-grant execute on function public.available_slots to anon, authenticated, service_role;
+-- Only the server (service_role) calls these; visitors reach them through the API routes.
+revoke execute on function public.available_slots(date, uuid) from public, anon, authenticated;
+grant execute on function public.available_slots(date, uuid) to service_role;
 grant execute on function public.create_appointment to service_role;
 
 -- ---------------------------------------------------------------- RLS
