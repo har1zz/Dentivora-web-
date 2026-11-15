@@ -10,7 +10,8 @@ export async function getServices() {
 
 export function formatPrice(s: { price_from: number | null; price_to: number | null; currency: string; price_note: string | null }) {
   if (s.price_from == null) return "Price confirmed by the clinic after an examination";
-  const f = (n: number) => `${s.currency} ${Number(n).toLocaleString("en-US")}`;
+  const sym = s.currency === "USD" ? "$" : `${s.currency} `;
+  const f = (n: number) => `${sym}${Number(n).toLocaleString("en-US")}`;
   const range = s.price_to && s.price_to !== s.price_from ? `${f(s.price_from)} to ${f(s.price_to)}` : f(s.price_from);
   return s.price_note ? `${range} (${s.price_note})` : range;
 }
@@ -22,7 +23,7 @@ export function timeLabel(hhmm: string) {
 }
 
 export function dateLabel(iso: string) {
-  return new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", {
+  return new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", {
     weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
   });
 }

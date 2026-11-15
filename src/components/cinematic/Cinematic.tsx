@@ -73,7 +73,7 @@ export function Cinematic() {
         {/* Scene 1: hero */}
         <div data-layer="0" className="absolute inset-x-0 bottom-0 top-0 flex flex-col justify-end px-5 pb-14 md:justify-center md:px-12 md:pb-0">
           <div className="max-w-2xl">
-            <p className="mb-5 text-sm tracking-wide text-teal">Dentivora · Dental care in Karachi</p>
+            <p className="mb-5 text-sm tracking-wide text-teal">Dentivora · Dental care in Austin, Texas</p>
             <h1 className="text-[clamp(3rem,8.2vw,7.2rem)]">Your smile deserves better.</h1>
             <p className="mt-6 max-w-md text-lg text-ink/75">Modern dentistry. Thoughtful care. A healthier smile.</p>
             <div className="mt-9 flex flex-wrap gap-3">

@@ -13,7 +13,7 @@ A cinematic, scroll-driven dental clinic website with live appointment booking, 
 
 ## Setup
 1. Create a **new** Supabase project. In the SQL editor run, in order:
-   `supabase/migrations/20261114000001_init.sql` then `20261114000002_seed.sql`.
+   `20261114000001_init.sql`, `20261114000002_seed.sql`, then `20261115000001_us_location.sql` (all in `supabase/migrations/`).
 2. Copy `.env.example` to `.env.local` and fill in the Supabase URL, anon key and service-role key (server only), `GMAIL_APP_PASSWORD`, and `BOOKING_LINK_SECRET`.
 3. In Supabase Auth create a staff user, then run:
    `insert into public.admin_users (user_id, role) values ('<that user id>', 'owner');`
@@ -27,4 +27,4 @@ A cinematic, scroll-driven dental clinic website with live appointment booking, 
 - The in-memory rate limiter suits a single server. On multi-instance hosting swap `src/lib/rate-limit.ts` for Redis/Upstash.
 
 ## Placeholders to replace before launch
-Clinic address and phone, prices (admin dashboard), dentist profiles (add real, verified credentials only), photography, and the "hygiene" / "technology" copy on the About page.
+Clinic address and phone (`src/lib/clinic-info.ts` and the `clinic_settings` table; the demo uses a fictional Austin, TX address and a reserved 555-01xx number), prices (admin dashboard), dentist profiles (add real, verified credentials only), photography, and the "hygiene" / "technology" copy on the About page.

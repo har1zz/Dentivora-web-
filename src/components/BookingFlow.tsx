@@ -6,7 +6,7 @@ type Svc = { id: string; name: string; duration_minutes: number; price_label: st
 type Result = { reference: string; manageUrl: string; service: string; date: string; time: string; emailSent: boolean };
 
 const fmtDate = (iso: string, long = false) =>
-  new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", long ? { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" } : { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", long ? { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" } : { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
 const fmtTime = (t: string) => { const [h, m] = t.split(":").map(Number); return `${((h + 11) % 12) + 1}:${String(m).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`; };
 
 const field = "mt-1.5 w-full rounded-xl border border-line bg-paper px-4 py-3 text-base outline-none transition focus:border-teal focus:ring-2 focus:ring-seaglass";
@@ -49,7 +49,7 @@ export function BookingFlow({ services, initialServiceId }: { services: Svc[]; i
     const e: Record<string, string[]> = {};
     if (form.fullName.trim().length < 2) e.fullName = ["Enter your full name"];
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) e.email = ["Enter a valid email address"];
-    if (!/^\+?[0-9 ()-]{7,20}$/.test(form.phone.trim()) || form.phone.replace(/\D/g, "").length < 7) e.phone = ["Enter a valid phone number, e.g. +92 300 1234567"];
+    if (!/^\+?[0-9 ()-]{7,20}$/.test(form.phone.trim()) || form.phone.replace(/\D/g, "").length < 7) e.phone = ["Enter a valid phone number, e.g. +1 512 555 0147"];
     setErrors(e);
     return Object.keys(e).length === 0;
   };

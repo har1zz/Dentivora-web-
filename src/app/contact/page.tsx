@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { loadHours } from "@/lib/public-data";
+import { CLINIC } from "@/lib/clinic-info";
 
 export const metadata: Metadata = { title: "Contact" };
 export const dynamic = "force-dynamic";
@@ -18,8 +19,8 @@ export default async function Contact() {
         <div className="space-y-10">
           <div>
             <h2 className="text-3xl">Visit or call</h2>
-            <address className="mt-3 text-lg not-italic text-ink/80">12 Placeholder Street<br />Karachi, Pakistan<br /><a className="text-teal hover:underline" href="tel:+923000000000">+92 300 0000000</a><br /><a className="text-teal hover:underline" href="mailto:harizzz191@gmail.com">harizzz191@gmail.com</a></address>
-            <p className="mt-2 text-sm text-ink/60">Address and phone are placeholders for the demo.</p>
+            <address className="mt-3 text-lg not-italic text-ink/80">{CLINIC.street}<br />{CLINIC.city}, {CLINIC.region} {CLINIC.postal}<br /><a className="text-teal hover:underline" href={`tel:${CLINIC.phoneTel}`}>{CLINIC.phoneDisplay}</a><br /><a className="text-teal hover:underline" href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a></address>
+            <p className="mt-2 text-sm text-ink/60">The address and phone number are fictional placeholders for this demo.</p>
           </div>
           <div>
             <h2 className="text-3xl">Opening hours</h2>
@@ -37,8 +38,8 @@ export default async function Contact() {
           <ContactForm />
         </div>
       </div>
-      <iframe title="Map of central Karachi" className="mt-16 h-80 w-full rounded-3xl border border-line" loading="lazy"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=66.95%2C24.80%2C67.20%2C24.95&layer=mapnik" />
+      <iframe title="Map of Austin, Texas" className="mt-16 h-80 w-full rounded-3xl border border-line" loading="lazy"
+        src={`https://www.openstreetmap.org/export/embed.html?bbox=${CLINIC.mapBbox}&layer=mapnik`} />
     </div>
   );
 }

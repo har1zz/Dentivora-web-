@@ -22,13 +22,13 @@ export async function GET(req: Request) {
     // No date: return which of the next 28 days have openings.
     if (!slotsQuerySchema.shape.serviceId.safeParse(serviceId).success)
       return NextResponse.json({ error: "Invalid service" }, { status: 400 });
-    const { data: settings } = await supabaseAdmin().from("clinic_settings").select("max_days_ahead").eq("id", 1).single();
+    const { data: settings } = await supabaseAdmin().from("clinic_settings").select("max_days_ahead, timezone").eq("id", 1).single();
     const horizon = Math.min(settings?.max_days_ahead ?? 60, 28);
+    const tz = settings?.timezone ?? "America/Chicago";
+    const today = new Date().toLocaleDateString("en-CA", { timeZone: tz }); // YYYY-MM-DD in the clinic's timezone
+    const noon = Date.parse(`${today}T12:00:00Z`);
     const days: string[] = [];
-    for (let i = 0; i < horizon; i++) {
-      const d = new Date(Date.now() + 5 * 3600_000 + i * 86400_000); // Karachi calendar day
-      days.push(d.toISOString().slice(0, 10));
-    }
+    for (let i = 0; i < horizon; i++) days.push(new Date(noon + i * 86400_000).toISOString().slice(0, 10));
     const results = await Promise.all(days.map(async (d) => ({ d, n: (await getSlots(serviceId, d)).length })));
     return NextResponse.json({ dates: results.filter((r) => r.n > 0).map((r) => r.d) });
   } catch {

@@ -16,8 +16,8 @@ const STYLE = "https://storage.googleapis.com/mychatbot-widget-assets/v1/style.c
 export function SmileAssistant() {
   const path = usePathname();
   const [ready, setReady] = useState(false);
-  const accountId = process.env.NEXT_PUBLIC_MYCHATBOT_ACCOUNT_ID;
-  const widgetId = process.env.NEXT_PUBLIC_MYCHATBOT_WIDGET_ID;
+  const accountId = process.env.NEXT_PUBLIC_MYCHATBOT_ACCOUNT_ID || "b7ec45dd-3448-4b8e-b767-d49bbc223923";
+  const widgetId = process.env.NEXT_PUBLIC_MYCHATBOT_WIDGET_ID || "dentivora-site";
   const hidden = path.startsWith("/admin");
 
   useEffect(() => {

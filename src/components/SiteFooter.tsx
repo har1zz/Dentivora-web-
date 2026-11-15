@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CLINIC } from "@/lib/clinic-info";
 
 export function SiteFooter() {
   const path = usePathname();
@@ -25,8 +26,8 @@ export function SiteFooter() {
         </nav>
         <div>
           <p className="text-sm text-ivory/60">Visit</p>
-          <address className="mt-3 not-italic text-ivory/85">12 Placeholder Street<br />Karachi, Pakistan</address>
-          <p className="mt-3"><a className="hover:text-seaglass" href="tel:+923000000000">+92 300 0000000</a></p>
+          <address className="mt-3 not-italic text-ivory/85">{CLINIC.street}<br />{CLINIC.city}, {CLINIC.region} {CLINIC.postal}</address>
+          <p className="mt-3"><a className="hover:text-seaglass" href={`tel:${CLINIC.phoneTel}`}>{CLINIC.phoneDisplay}</a></p>
         </div>
       </div>
       <p className="border-t border-white/10 px-5 py-5 text-center text-xs text-ivory/50">

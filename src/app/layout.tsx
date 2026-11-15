@@ -22,7 +22,7 @@ const sans = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: { default: "Dentivora | Modern dentistry in Karachi", template: "%s | Dentivora" },
+  title: { default: "Dentivora | Modern dentistry in Austin, Texas", template: "%s | Dentivora" },
   description: "Thoughtful, modern dental care. Book a check-up, cleaning, whitening or any treatment online in minutes.",
   openGraph: { title: "Dentivora", description: "Modern dentistry. Thoughtful care. A healthier smile.", type: "website" },
 };

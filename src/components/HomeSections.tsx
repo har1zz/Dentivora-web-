@@ -16,7 +16,7 @@ export async function HomeSections() {
         <div className="grid gap-10 md:grid-cols-12">
           <h2 className="text-4xl md:col-span-6 md:text-6xl">A clinic built around how it feels to be there.</h2>
           <div className="space-y-5 text-lg text-ink/75 md:col-span-5 md:col-start-8">
-            <p>Dentivora is a modern dental clinic in Karachi. We keep appointments calm, explain what we find, and let you decide what happens next.</p>
+            <p>Dentivora is a modern dental clinic in Austin, Texas. We keep appointments calm, explain what we find, and let you decide what happens next.</p>
             <p>Our approach is simple: prevention first, treatment when it is needed, and honest advice either way.</p>
             <Link href="/about" className="inline-block border-b border-ink pb-0.5 hover:border-teal hover:text-teal">About the clinic</Link>
           </div>
